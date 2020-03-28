@@ -83,7 +83,12 @@ end
 function get_n()
 	println("What value for 'n' would you like to use:")
 	try
-		return parse(Int, readline())
+		x = parse(Int, readline())
+		if x == 2 || x == 3
+			println("No solution exists for $x.")
+			Base.exit()
+		end
+		return 
 	catch e
 		if isa(e, ArgumentError)
 			println("Input was not an int")
