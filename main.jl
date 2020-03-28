@@ -1,10 +1,15 @@
+import Statistics
 "The Board"
 mutable struct Board
 	size::Int
 	b::Array{Int}
+	moves::Int
+	restarts::Int
+	restart::Bool
 
-	function Board(size)
-		new(size, [rand(1:size) for i in 1:size])
+
+	function Board(size, restarts = 0, restart = false)
+		new(size, [rand(1:size) for i in 1:size], 0, restarts, restart)
 	end
 end
 "Location Tuple"
@@ -20,16 +25,16 @@ function Print_Board(b)
 	end
 end
 "Get the Hueristic Score by counting how many challengers there are"
-function Hueristic_Score(b)
+function Hueristic_Score(b,size)
 	h = 0
-	for i in 1:b.size
+	for i in 1:size
 
-		for j in i + 1:b.size
-			if b.b[i] === b.b[j]
+		for j in i + 1:size
+			if b[i] === b[j]
 				h += 1
 			end
 			offset = j - i
-			if b.b[i] === b.b[j] - offset || b.b[i] === b.b[j] + offset
+			if b[i] === b[j] - offset || b[i] === b[j] + offset
 				h += 1
 			end
 		end
@@ -49,9 +54,9 @@ function Move!(b)
                 continue
 			end
 
-			b_copy = deepcopy(b)
-            b_copy.b[col] = row
-            moves[Location(row, col)] = Hueristic_Score(b_copy)
+			b_copy = deepcopy(b.b)
+            b_copy[col] = row
+            moves[Location(row, col)] = Hueristic_Score(b_copy,b.size)
 		end
 	end
 
@@ -71,6 +76,8 @@ function Move!(b)
 
 	best_move = best_moves[begin]
 	b.b[best_move.y] = best_move.x
+	
+	b.moves += 1
 
     return b
 end
@@ -94,17 +101,68 @@ function get_n()
 	end
 end
 
-"Main function that plays the game"
-function main()
-	n = get_n()
-	b = Board(n)
-	while Hueristic_Score(b) > 0
-		Move!(b)
+"Get Bool input"
+function get_r()
+	println("Do you want random restarts on failure?")
+	try
+		x = parse(Bool, readline())
+		return x
+	catch e
+		if isa(e, ArgumentError)
+			println("Input was not a Bool")
+		end
+		println("Using false as default value")
+		return false
 	end
-	println("Solution:")
-	Print_Board(b)
 end
 
-main()
+"Main function that plays the game"
+function main(n, restart)
+	
+	b = Board(n, 0,restart)
+
+	while (old_score = Hueristic_Score(b.b,b.size)) > 0
+		Move!(b)
+		score = Hueristic_Score(b.b,b.size)
+
+		if b.restart && score >= old_score
+			# println("-"^10)
+			# println(b)
+			b = Board(n, b.restarts + 1, restart)
+			# println(b)
+		elseif score >= old_score
+			b.moves = -1
+			return b
+		else
+
+		end
+	end
+	return b
+    # println("Solution:")
+	# Print_Board(b)
+end
+
+function loop()
+	total = 0
+	fail = 0
+	restarts = 0
+	iter = 100
+	r = get_r()
+	n = get_n()
+	for i = 1:iter
+		b = main(n, r)
+		if b.moves < 0
+			fail += 1
+		else
+			total += b.moves
+			restarts += b.restarts
+		end
+	end
+		total /= (iter - fail)
+	println("Average moves $total")
+	println("Restarted $restarts times") 
+	println("Fails $fail")
+end
+    loop()
 
 
