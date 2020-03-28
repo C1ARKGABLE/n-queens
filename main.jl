@@ -1,8 +1,7 @@
 "The Board"
 mutable struct Board
 	size::Int
-	b
-	# solutions
+	b::Array{Int}
 
 	function Board(size)
 		new(size, [rand(1:size) for i in 1:size])
@@ -88,7 +87,7 @@ function get_n()
 			println("No solution exists for $x.")
 			Base.exit()
 		end
-		return 
+		return x
 	catch e
 		if isa(e, ArgumentError)
 			println("Input was not an int")
