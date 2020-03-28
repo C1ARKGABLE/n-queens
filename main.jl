@@ -8,20 +8,20 @@ mutable struct Board
 		new(size, [rand(1:size) for i in 1:size])
 	end
 end
-
+"Location Tuple"
 mutable struct Location
     x::Int
     y::Int
 
 end
-
+"Print the Board... Rotated 90 degrees because lshift"
 function Print_Board(b)
 	for i in b.b
 		println(lpad(string(1 << (i - 1), base = 2), b.size, "0"))
 	end
 end
-
-    function Hueristic_Score(b)
+"Get the Hueristic Score by counting how many challengers there are"
+function Hueristic_Score(b)
 	h = 0
 	for i in 1:b.size
 
@@ -37,8 +37,8 @@ end
 	end
 	return h
 end
-
-    function Move!(b)
+"Move the board in accordance with the best score"
+function Move!(b)
     
 	moves = Dict{Location,Int64}()
     for col in 1:b.size
@@ -78,9 +78,8 @@ end
 	b.b[best_move.y] = best_move.x
 
     return b
-end
-
-    
+end  
+"Get user input"
 function get_n()
 	println("What value for 'n' would you like to use:")
 	try
@@ -93,8 +92,8 @@ function get_n()
 		return 8
 	end
 end
-
-    function main()
+"Main function that plays the game"
+function main()
 	n = get_n()
 	b = Board(n)
 	while Hueristic_Score(b) > 0
@@ -102,7 +101,7 @@ end
 	end
 	println("Solution:")
 	Print_Board(b)
-end
+    end
 
     
 main()
