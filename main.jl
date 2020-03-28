@@ -38,20 +38,18 @@ function Hueristic_Score(b)
 end
 "Move the board in accordance with the best score"
 function Move!(b)
-    
+
 	moves = Dict{Location,Int64}()
     for col in 1:b.size
         best_move = b.b[col]
 
         for row in 1:b.size
-            if b.b[col] == row
-                # We don't need to evaluate the current
-                # position, we already know the h-value
+			if b.b[col] == row
+				# Skip this row
                 continue
 			end
 
 			b_copy = deepcopy(b)
-            # Move the queen to the new row
             b_copy.b[col] = row
             moves[Location(row, col)] = Hueristic_Score(b_copy)
 		end
@@ -66,9 +64,7 @@ function Move!(b)
 	end
 
 	for (key, value) in moves
-	
 		if value == h_to_beat
-			# println(key)
 			push!(best_moves, key)
 		end
 	end
@@ -77,7 +73,8 @@ function Move!(b)
 	b.b[best_move.y] = best_move.x
 
     return b
-end  
+end
+
 "Get user input"
 function get_n()
 	println("What value for 'n' would you like to use:")
@@ -96,6 +93,7 @@ function get_n()
 		return 8
 	end
 end
+
 "Main function that plays the game"
 function main()
 	n = get_n()
@@ -105,9 +103,8 @@ function main()
 	end
 	println("Solution:")
 	Print_Board(b)
-    end
+end
 
-    
 main()
 
 
