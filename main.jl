@@ -120,12 +120,14 @@ end
 function main(n, restart)
 	
 	b = Board(n, 0, restart)
-	# Print_Board(b)
-	# println("-------------")
+	Print_Board(b)
+	
 	steps_to_fail = 0
 
 	while (old_score = Hueristic_Score(b.b,b.size)) > 0
 		Move!(b)
+		println("-------------")
+		Print_Board(b)
 		score = Hueristic_Score(b.b,b.size)
 
 		if b.restart && score >= old_score
@@ -150,7 +152,7 @@ function loop()
 	f_total = 0
 	fail = 0
 	restarts = 0
-	iter = 500
+	iter = 1
 	r = get_r()
 	n = get_n()
 	for i = 1:iter
