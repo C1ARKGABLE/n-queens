@@ -23,4 +23,95 @@ Hill Climbing Search is a simple search algorithm that finds local minima or max
 ### Why Julia?
 Honestly, I could have picked [any programming language](https://en.wikipedia.org/wiki/List_of_programming_languages) (Like, all the way down to [assembly](https://en.wikipedia.org/wiki/Assembly_language)... It'd be fast 🖥💨). I was curious to learn Julia, as it has been on my radar for a while as a efficient addition to [Python](https://en.wikipedia.org/wiki/Python_(programming_language)), my native language. So, why not Julia?
 
-#### Breakdowns:
+#### Breakdowns for 8-queens over 500x runs:
+##### Sandard Hill Climbing Search:
+* Average moves to success 3.904
+* Average moves to failure 4.024
+* Failed 417 times
+##### Random Restart Hill Climbing Search:
+* Average moves to success 29.656
+* Average moves to failure 28.657
+* Restarted 3145 times
+
+##### 8x Sample Start Sequences:
+&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+-|-|-|-|-|-|-|-
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|
+&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|
+&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|
+
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|
+-|-|-|-|-|-|-|-
+&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|
+&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|
+
+&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+-|-|-|-|-|-|-|-
+&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|
+
+&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+-|-|-|-|-|-|-|-
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+
+
+
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|
+-|-|-|-|-|-|-|-
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+
+&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+-|-|-|-|-|-|-|-
+&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|
+&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+
+Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+-|-|-|-|-|-|-|-
+Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+
+&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+-|-|-|-|-|-|-|-
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|Q|&nbsp;|&nbsp;|&nbsp;|
+Q|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
