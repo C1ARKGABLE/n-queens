@@ -23,6 +23,36 @@ Hill Climbing Search is a simple search algorithm that finds local minima or max
 ### Why Julia?
 Honestly, I could have picked [any programming language](https://en.wikipedia.org/wiki/List_of_programming_languages) (Like, all the way down to [assembly](https://en.wikipedia.org/wiki/Assembly_language)... It'd be fast 🖥💨). I was curious to learn Julia, as it has been on my radar for a while as a efficient addition to [Python](https://en.wikipedia.org/wiki/Python_(programming_language)), my native language. So, why not Julia?
 
+#### Sample moves for 4-Queens:
+
+###### Starting State:
+&nbsp;|&nbsp;|Q|&nbsp;|
+-|-|-|-
+&nbsp;|&nbsp;|Q|&nbsp;|
+&nbsp;|&nbsp;|Q|&nbsp;|
+Q|&nbsp;|&nbsp;|&nbsp;|
+
+###### Move 1:
+&nbsp;|&nbsp;|Q|&nbsp;|
+-|-|-|-
+Q|<-||&nbsp;|
+&nbsp;|&nbsp;|Q|&nbsp;|
+Q|&nbsp;|&nbsp;|&nbsp;|
+
+###### Move 2:
+&nbsp;|&nbsp;|Q|&nbsp;|
+-|-|-|-
+Q|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|->|Q|
+Q|&nbsp;|&nbsp;|&nbsp;|
+
+###### Move 3 and solution:
+&nbsp;|&nbsp;|Q|&nbsp;|
+-|-|-|-
+Q|&nbsp;|&nbsp;|&nbsp;|
+&nbsp;|&nbsp;|&nbsp;|Q|
+->|Q|&nbsp;|&nbsp;|
+
 #### Breakdowns for 8-queens over 500x runs:
 ##### Sandard Hill Climbing Search:
 * Average moves to success 3.904
