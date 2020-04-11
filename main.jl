@@ -8,8 +8,8 @@ mutable struct Board
 	restart::Bool
 
 
-	function Board(size, restarts = 0, restart = false)
-		new(size, [rand(1:size) for i in 1:size], 0, restarts, restart)
+	function Board(size, restarts = 0, restart = false, moves = 0)
+		new(size, [rand(1:size) for i in 1:size], moves, restarts, restart)
 	end
 end
 "Location Tuple"
@@ -119,7 +119,10 @@ end
 "Main function that plays the game"
 function main(n, restart)
 	
-	b = Board(n, 0,restart)
+	b = Board(n, 0, restart)
+	# Print_Board(b)
+	# println("-------------")
+	steps_to_fail = 0
 
 	while (old_score = Hueristic_Score(b.b,b.size)) > 0
 		Move!(b)
@@ -128,41 +131,52 @@ function main(n, restart)
 		if b.restart && score >= old_score
 			# println("-"^10)
 			# println(b)
-			b = Board(n, b.restarts + 1, restart)
+			steps_to_fail += b.moves
+			b = Board(n, b.restarts + 1, restart, b.moves)
 			# println(b)
 		elseif score >= old_score
-			b.moves = -1
-			return b
+			return b, true, steps_to_fail
 		else
 
 		end
 	end
-	return b
+	return b, false, steps_to_fail
     # println("Solution:")
 	# Print_Board(b)
 end
 
 function loop()
 	total = 0
+	f_total = 0
 	fail = 0
 	restarts = 0
-	iter = 100
+	iter = 500
 	r = get_r()
 	n = get_n()
 	for i = 1:iter
-		b = main(n, r)
-		if b.moves < 0
+		b, failed, steps = main(n, r)
+		f_total += steps
+		if failed
 			fail += 1
+			f_total += b.moves
 		else
 			total += b.moves
 			restarts += b.restarts
 		end
 	end
-		total /= (iter - fail)
-	println("Average moves $total")
+	total /= (iter - fail)
+	if r 
+		f_total /= restarts
+	else
+		f_total /= fail
+	end
+
+	println("Average moves to success $total")
+	println("Average moves to failure $f_total")
 	println("Restarted $restarts times") 
 	println("Fails $fail")
 end
-    loop()
+
+loop()
 
 
